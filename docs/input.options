@@ -1,0 +1,69 @@
+MODEL
+(Specify the model: Hubbard, Anderson or read from disk and whether to not include a chemical potential)
+    SYSTEM READ/HUBBARD/ANDERSON NO_CHEMPOT
+(Number of sites in the model. Second argument is the dimensionality of the model)
+    SITES   24 1
+(Number of electrons to include in the entire system)
+    FILLING 24
+(Unrestricted mean-field calculation for (anti-)ferromagnetic phase solutions)
+    UHF
+(List of U values to consider)
+    U_VALS 0.0 1.5 4.0 10.0
+(Range of U values to consider (Start End Step) Step can be negative to ramp down in U)
+    U   0.0 1.1 0.5
+(Read converged correlation potentials from file, with filename CORRPOT_FILE. Optionally continue convergence of correlation potential with CONT_CONV)
+    READ_CORRPOT CORRPOT_FILE CONT_CONV
+(Use previous U converged correlation potential when starting next U value)
+    REUSE_CORRPOT
+(Periodic boundary conditions)
+    PBC
+(Anti-periodic boundary conditions)
+    APBC
+(Maximum iterations in the DMET convergence)
+    MAXITER_DMET 150
+(Perform self-consistent hartree--fock calculation (required for single-reference response calculations))
+    SCF_HF
+(Number of impurity sites)
+    IMPSITES 1
+(Half-filling or not)
+    HALF_FILL
+(Impurity solver is complete diagonalization)
+    COMPLETE_DIAG
+(Impurity solver is built-in non-direct davidson diagonalizer)
+    NONDIR_DAVIDSON
+(Compress matrices for nondir_davidson solver with optional threshold for matrix elements)
+    COMPRESSMATS <THRESH>
+END
+
+LINEAR_RESPONSE
+(Calculate density-density response functions over both spins)
+    DD_RESPONSE
+(Calculate charged particle + hole response functions - by default for alpha spins only)
+    GF_RESPONSE
+(Calculate the one-electron greens function over the beta excitation space)
+    BETA_GF
+(Solve linear system with a non-direct MINRES iterative solver)
+    NONDIR_MINRES
+(Solve linear system with a non-direct GMRES iterative solver (preferable))
+    NONDIR_GMRES
+(Max number of iterations for each attempt at the linear equation solver)
+    MINRES_MAXITER 20000
+(Reuse the previous frequency solution as a starting vector for the next one)
+    REUSE_FIRSTORDER_PSI
+(Use preconditioning with iterative linear system solver)
+    PRECONDITION_LR
+(The number of Kryloc subspace vectors to store before restarting in the GMRES algorithm)
+    NKRYLOV 100
+(Calculate non-interacting response functions with HF orbitals)
+    NONINT
+(Calculate TDA response functions with HF orbitals)
+    TDA
+(Calculate RPA response functions with HF orbitals)
+    RPA
+(Calculate externally contracted DMET response functions with TDA-type excitations (Argument 1-4 changes type of non-iterative solver))
+    EC_TDA 1
+(Range of frequencies to calculate (Start End Step))
+    FREQ 0.0 8.0 0.01
+(Spectral broadening)
+    BROADENING 0.01
+END
